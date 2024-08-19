@@ -220,14 +220,11 @@ public class Hotel{
             PdfWriter.getInstance(document1, new FileOutputStream(pdfFile));
             document1.open();
             
-            // Create a font for the document
             Font font = FontFactory.getFont(FontFactory.COURIER_BOLD, 14, com.itextpdf.text.BaseColor.BLACK);
             
-            // Execute the query
             Statement statement = con.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             
-            // Process the result set
             if (resultSet.next()) {
                 int reservationId = resultSet.getInt("RESERVATIONID");
                 String guestName = resultSet.getString("GUEST");
@@ -235,7 +232,6 @@ public class Hotel{
                 String contactNumber = resultSet.getString("CONTACTNUMBER");
                 String reservationDate = resultSet.getString("RESERVATIONDATE");
 
-                // Add content to the PDF
                 document1.add(new Paragraph("Reservation ID: " + reservationId, font));
                 document1.add(new Paragraph("Guest Name: " + guestName, font));
                 document1.add(new Paragraph("Room Number: " + roomNumber, font));
@@ -245,7 +241,6 @@ public class Hotel{
                 System.out.println("No data found for the given reservation ID.");
             }
             
-            // Close the document
             document1.add(new Paragraph("\n",font));
             document1.add(new Paragraph("Thank you booking the Hotel.. Have a great day..!",font));
             document1.close();
@@ -263,7 +258,6 @@ public class Hotel{
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            // Clean up resources
             con.close();
         }
     }
